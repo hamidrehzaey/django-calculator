@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<header>
+<title>
+{{ title }}
+</title>
+</header>
+
+<boddy>
+<ul>
+<a href = " {% url 'HomePage' %} "> صفحه اصلی</a>
+</ul>
+<hr>
+<main>
+<h1> {{ title }} </h1>
+<form method = 'post'>
+{%csrf_token%}
+{{ form }}
+<button type = "add" name = "add"> بعلاوه</button>
+<button type = "subtract" name= "subtract"> منها </button>
+<button type = "multiplication" name="multiplication"> ضرب </button>
+<button type = "division" name = "division"> تقسیم </button>
+</form>
+{% if form.is_valid %}
+<h1> نتیجه:  </h1>
+{% if 'add' in request.POST %}
+<p> حاصل جمع {{numOut1 }}  + {{ numOut2 }} = {{ output }} </p>
+{% endif %}
+{% if 'subtract' in request.POST %}
+<p> حاصل تفریق {{numOut1 }}  - {{ numOut2 }} = {{ output }} </p>
+{% endif %}
+{% if 'multiplication' in request.POST %}
+<p> حاصل ضرب {{numOut1 }}  * {{ numOut2 }} = {{ output }} </p>
+{% endif %}
+{% if 'division' in request.POST %}
+<p> حاصل تقسیم {{numOut1 }}  / {{ numOut2 }} = {{ output }} </p>
+{% endif %}
+<form method = 'post'>
+{% csrf_token %}
+<button type = "clear" name = "clear"> پاک کردن فرم </button>
+</form>
+{% endif %}
+</main>
+</body>
+</html>
